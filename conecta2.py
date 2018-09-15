@@ -4,6 +4,19 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+def grafico(ax, x, x_lab, y, color, servidor, titulo=''):
+    ax.plot(x, y, color = color)
+    plt.xticks(x, x_lab, rotation = 50)
+    for xx in x_lab:
+        if len(xx) > 2:
+            ejex = x[x_lab.index(xx)]
+            ax.plot([ejex, ejex], [0,ax.axis()[3]], 'k-')
+    ax.set(xlabel = 'hora', ylabel = 'cantidad',
+           title = titulo)
+    ax.text(3, 8, servidor, bbox = {'facecolor':color, 'alpha':0.5, 'pad':10})
+    ax.grid()
+
+
 def etiqs(lis):
     ejex = range(len(lis.Hora))
     ejex_lab = []
@@ -34,28 +47,8 @@ y2 = conecta69.Usuarios_conectados
 plt.figure(1)
 
 ax1 = plt.subplot(211)
-ax1.plot(x1, y1)
-plt.xticks(x1, x1_lab, rotation=50)
-for xx in x1_lab:
-    if len(xx)>2:
-        ejex = x1[x1_lab.index(xx)]
-        ax1.plot([ejex, ejex], [0, ax1.axis()[3]], 'k-')
-        
-ax1.set(xlabel='hora', ylabel='cantidad',
-       title='Usuarios conectados')
-ax1.text(3, 8, '75', bbox={'facecolor':'blue', 'alpha':0.5, 'pad':10})
-ax1.grid()
-
+grafico(ax1, x1, x1_lab, y1, 'b', 'Adm Mercado', 'Usuarios conectados')
 
 ax2 = plt.subplot(212)
-ax2.plot(x2, y2, color = 'g')
-plt.xticks(x2, x2_lab, rotation=50)
-for xx in x2_lab:
-    if len(xx)>2:
-        ejex = x2[x2_lab.index(xx)]
-        ax2.plot([ejex, ejex], [0, ax2.axis()[3]], 'k-')
-
-ax2.set(xlabel='hora', ylabel='cantidad')
-ax2.text(3, 8, '69', bbox={'facecolor':'green', 'alpha':0.5, 'pad':10})
-ax2.grid()
+grafico(ax2, x2, x2_lab, y2, 'g', 'Sec Casa')
 plt.show()
