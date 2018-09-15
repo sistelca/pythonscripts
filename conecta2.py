@@ -4,7 +4,17 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
 def grafico(ax, x, x_lab, y, color, servidor, titulo=''):
+    # ax: objeto grafico
+    # x: indice de eje x (lista de valores numericos)
+    # x_lab: etiquetas para valores del eje x
+    # y: valores del eje y (viene de el dataframe
+    # color: color delcontexto grafico
+    # servidor: identificacion del ordenador que envia los datos
+    # titulo: titulo de grafico
+
+    
     ax.plot(x, y, color = color)
     plt.xticks(x, x_lab, rotation = 50)
     for xx in x_lab:
